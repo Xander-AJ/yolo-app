@@ -1,0 +1,34 @@
+version: '3'
+services:
+  # MongoDB Container
+  mongo_ip2:
+    container_name: mongo_ip2
+    image: mongo:latest
+    networks:
+      - yolo_ip2_network
+    volumes:
+      - mongodb_data:/data/db
+
+  # Node.js Backend Container with Ngrok
+  node_ip2:
+    container_name: node_ip2
+    build:
+      context: .
+      dockerfile: Dockerfile-node
+    networks:
+      - yolo_ip2_network
+    depends_on:
+      - mongo_ip2
+    volumes:
+      - ./app:/app
+    # Start Ngrok along with Node.js app
+    command: bash -c "npm install && node app.js & ./ngrok http 5000"
+
+networks:
+  yolo_ip2_network:
+    external: true
+
+volumes:
+  mongodb_data:
+    driver: local
+

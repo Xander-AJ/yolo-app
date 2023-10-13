@@ -1,0 +1,18 @@
+# Use a lightweight Alpine Linux as the base image
+FROM alpine:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Download and install Ngrok
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip && \
+    rm ngrok-stable-linux-amd64.zip && \
+    chmod +x ./ngrok
+
+# Expose port 4040 for Ngrok web interface (optional)
+EXPOSE 4040
+
+# Command to run Ngrok
+CMD ["./ngrok", "http", "3000"]
+

@@ -1,0 +1,28 @@
+# Use an official Node.js image as the base image
+FROM node:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Install Ngrok
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip && \
+    rm ngrok-stable-linux-amd64.zip && \
+    chmod +x ./ngrok && \
+    mv ngrok /usr/local/bin/ngrok
+
+# Copy package.json and package-lock.json to the container
+COPY backend/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy all files from the current directory to the container
+COPY . .
+
+# Expose port 5000 for the Node.js application (backend)
+EXPOSE 5000
+
+# Command to run the application with Ngrok (starts backend on port 5000)
+CMD ["bash", "-c", "node server.js & ngrok http 5000"]
+

@@ -1,0 +1,28 @@
+# Use an official Node.js image as the base image for building the frontend
+FROM node:latest as build
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy all files from the current directory to the container
+COPY . ./
+
+# Build the React app
+RUN npm run build
+
+# Use Ngrok to expose port 3000 for the frontend
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip && \
+    rm ngrok-stable-linux-amd64.zip && \
+    chmod +x ./ngrok && \
+    ./ngrok authtoken 2Vtv5gNAPxwZNItfHqQwM28JcEz_3iySkfMwBYNPB2sQDRF2G && \
+    ./ngrok http 3000 --region=us &
+
+# No need for EXPOSE or CMD as they are not used in multi-stage builds
+
