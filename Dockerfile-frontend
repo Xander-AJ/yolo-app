@@ -1,5 +1,5 @@
 # Use an official Node.js image as the base image for building the frontend
-FROM node:latest as build
+FROM node:alpine
 
 # Set the working directory inside the container
 WORKDIR /app
