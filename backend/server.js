@@ -4,6 +4,12 @@ const cors = require('cors');
 const multer = require('multer');
 const upload = multer();
 
+const corsOptions = {
+  origin: 'http://localhost:3000', // Replace with the actual origin of your frontend app
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+};
+
 const productRoute = require('./routes/api/productRoute');
 
 // Connecting to the Database
@@ -35,7 +41,7 @@ app.use(express.json())
 app.use(upload.array()); 
 
 // Cors 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Use Route
 app.use('/api/products', productRoute)
