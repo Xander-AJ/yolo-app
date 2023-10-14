@@ -21,8 +21,23 @@ services:
       - mongo_ip2
     volumes:
       - ./app:/app
-    # Start Ngrok along with Node.js app
-    command: bash -c "npm install && node app.js & ./ngrok http 5000"
+    ports:
+      - "5000:5000"  # Map host port to container port
+    # Start the application with PM2 (or any other process manager you prefer)
+    command: ["npm", "start"]
+
+  # Frontend Container (React Development Server)
+  frontend_ip2:
+    container_name: frontend_ip2
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    networks:
+      - yolo_ip2_network
+    ports:
+      - "3000:3000"  # Map host port to container port
+    # Start the React development server
+    command: ["npm", "start"]
 
 networks:
   yolo_ip2_network:

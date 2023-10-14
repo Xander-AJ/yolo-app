@@ -23,6 +23,6 @@ COPY . .
 # Expose port 5000 for the Node.js application (backend)
 EXPOSE 5000
 
-# Command to run the application with Ngrok (starts backend on port 5000)
-CMD ["bash", "-c", "node server.js & ngrok http 5000"]
+# Start the application with PM2 (or any other process manager you prefer)
+CMD ["pm2-runtime", "server.js"]
 
