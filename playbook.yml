@@ -1,0 +1,7 @@
+---
+- name: Deploy Yolo Application
+  hosts: all
+  roles:
+    - mongo
+    - node
+    - frontend

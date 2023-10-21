@@ -1,0 +1,18 @@
+ansible-playbook/
+├── roles/
+│   ├── mongo/
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── vars/
+│   │       └── main.yml
+│   ├── node/
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── vars/
+│   │       └── main.yml
+│   └── frontend/
+│       ├── tasks/
+│       │   └── main.yml
+│       └── vars/
+│           └── main.yml
+└── playbook.yml
