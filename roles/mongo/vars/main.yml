@@ -1,0 +1,4 @@
+---
+mongo_container_name: mongo_ip2
+mongo_network: yolo_ip2_network
+mongo_volume: mongodb_data

@@ -1,0 +1,3 @@
+---
+frontend_container_name: frontend_ip2
+frontend_network: yolo_ip2_network

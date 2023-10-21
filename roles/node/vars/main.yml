@@ -1,0 +1,4 @@
+---
+node_container_name: node_ip2
+node_network: yolo_ip2_network
+node_volume: node_data/app

@@ -1,0 +1,15 @@
+---
+- name: Build Frontend Container
+  docker_container:
+    name: frontend_ip2
+    image: node:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    networks:
+      - yolo_ip2_network
+    ports:
+      - "3000:3000"
+    command: "npm start"
+  become: yes
+
