@@ -1,4 +1,8 @@
 version: '3'
+networks:
+  yolo_ip2_network:
+    external: true
+    
 services:
   # MongoDB Container
   mongo_ip2:
@@ -38,10 +42,6 @@ services:
       - "3000:3000"  # Map host port to container port
     # Start the React development server
     command: ["npm", "start"]
-
-networks:
-  yolo_ip2_network:
-    external: true
 
 volumes:
   mongodb_data:
