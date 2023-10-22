@@ -1,9 +1,8 @@
 ---
 - name: Pull MongoDB Image
   docker_image:
-    source: pull 
     name: mongo:latest
-    state: present
+    source: pull 
   become: yes
 
 - name: Create MongoDB Volume
