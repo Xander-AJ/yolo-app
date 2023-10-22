@@ -1,13 +1,13 @@
 ---
 - name: Pull image from repository
   docker_image:
-    name: ip2/node_ip2:latest
+    name: casperx7/ip2:node_ip2
     source: pull
 
 - name: Create Node.js Backend Container
   docker_container:
     name: node_ip2
-    image: ip2/node_ip2:latest
+    image: casperx7/ip2:node_ip2
     networks:
       - name: yolo_ip2_network
     ports:
