@@ -1,13 +1,15 @@
 ---
-- name: Build Frontend Container
+- name: Pull image from repository
+  docker_image:
+    name: ip2/frontend_ip2:latest
+    source: pull
+
+- name: Create Node.js Frontend Container
   docker_container:
     name: frontend_ip2
-    image: node:alpine
-    build:
-      context: .
-      dockerfile: Dockerfile-frontend
+    image: ip2/frontend_ip2:latest
     networks:
-      - yolo_ip2_network
+      - name: yolo_ip2_network
     ports:
       - "3000:3000"
     command: "npm start"
