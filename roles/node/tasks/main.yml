@@ -1,13 +1,17 @@
 ---
-- name: Build Node.js Backend Container
+- name: Pull image from repository
+  docker_image:
+    name: ip2/node_ip2:latest
+    source: pull
+
+- name: Create Node.js Backend Container
   docker_container:
     name: node_ip2
-    image: node:alpine
-    volumes:
-      - node_data:/app
-    ports:
-      - "5000:5000"
+    image: ip2/node_ip2:latest
     networks:
       - name: yolo_ip2_network
+    ports:
+      - "5000:5000"
+    command: "npm start"
   become: yes
 
