@@ -2,6 +2,7 @@
 - name: Deploy Yolo Application
   hosts: all
   roles:
+    - installations
     - mongo
     - node
     - frontend
