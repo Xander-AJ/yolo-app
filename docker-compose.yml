@@ -5,7 +5,7 @@ networks:
     
 services:
   # MongoDB Container
-  mongo_ip2:
+  mongo_db:
     container_name: mongo_ip2
     image: mongo:latest
     networks:
@@ -14,7 +14,7 @@ services:
       - mongodb_data:/data/db
 
   # Node.js Backend Container with Ngrok
-  node_ip2:
+  backend:
     container_name: node_ip2
     build:
       context: .
@@ -31,7 +31,7 @@ services:
     command: ["npm", "start"]
 
   # Frontend Container (React Development Server)
-  frontend_ip2:
+  frontend:
     container_name: frontend_ip2
     build:
       context: .
