@@ -22,7 +22,7 @@ services:
     networks:
       - yolo_ip2_network
     depends_on:
-      - mongo_ip2
+      - mongo_db
     volumes:
       - ./app:/app
     ports:
