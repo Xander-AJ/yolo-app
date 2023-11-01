@@ -3,14 +3,6 @@ FROM mongo:latest AS backend-builder
 
 WORKDIR /app
 
-# Install Ngrok using curl
-RUN apk --no-cache add curl && \
-    curl -o ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
-    unzip ngrok.zip && \
-    rm ngrok.zip && \
-    chmod +x ./ngrok && \
-    mv ngrok /usr/local/bin/ngrok
-
 # Copy backend files
 COPY backend/package*.json ./
 RUN npm install
