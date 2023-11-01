@@ -2,3 +2,4 @@ vars.yml
 vault.yml
 .vagrant
 .vscode
+mongo-secret.yaml
