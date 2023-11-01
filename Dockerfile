@@ -3,10 +3,11 @@ FROM mongo:latest AS backend-builder
 
 WORKDIR /app
 
-# Install Ngrok
-RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
-    unzip ngrok-stable-linux-amd64.zip && \
-    rm ngrok-stable-linux-amd64.zip && \
+# Install Ngrok using curl
+RUN apk --no-cache add curl && \
+    curl -o ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok.zip && \
+    rm ngrok.zip && \
     chmod +x ./ngrok && \
     mv ngrok /usr/local/bin/ngrok
 
@@ -38,7 +39,7 @@ WORKDIR /app
 
 # Copy MongoDB data and backend files from the build stages
 COPY --from=backend-builder /app /app
-COPY --from=frontend-builder /app/build /app/client
+COPY --from=frontend-builder /app /app/client
 
 # Start the application
 CMD ["pm2-runtime", "server.js"]
