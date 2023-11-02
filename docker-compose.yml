@@ -18,7 +18,7 @@ services:
     container_name: node_ip2
     build:
       context: .
-      dockerfile: Dockerfile-node
+      dockerfile: Dockerfile-backend
     networks:
       - yolo_ip2_network
     depends_on:
