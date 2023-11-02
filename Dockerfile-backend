@@ -1,28 +1,21 @@
-# Use an official Node.js Alpine image as the base image
-FROM node:alpine
+# Use the existing mvictorn/yolo-backend image as the base image
+FROM node
 
-# Set the working directory inside the container
+# Set the working directory inside the container (if necessary)
 WORKDIR /app
 
-# Install Ngrok
-RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
-    unzip ngrok-stable-linux-amd64.zip && \
-    rm ngrok-stable-linux-amd64.zip && \
-    chmod +x ./ngrok && \
-    mv ngrok /usr/local/bin/ngrok
-
-# Copy package.json and package-lock.json to the container
+# Copy any additional files or configurations your application needs
 COPY backend/package*.json ./
 
-# Install dependencies
+# Install additional dependencies if required
 RUN npm install
 
-# Copy all files from the current directory to the container
+# Copy your application files
 COPY backend/ /app/
 
-# Expose port 5000 for the Node.js application (backend)
+# Expose port 5000 for the Node.js application (backend) - optional, if not already exposed in the base image
 EXPOSE 5000
 
-# Start the application with PM2 (or any other process manager you prefer)
+# Start the application with PM2 (or any other process manager you prefer) - optional, if not already started in the base image
 CMD ["pm2-runtime", "server.js"]
 
