@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
+  labels:
+    app: backend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: backend
@@ -14,8 +16,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: node
-          command: ["node", "server.js"] 
+          image: casperx7/ip_4:backend_ip4
+          command: ["npm", "start"] 
           ports:
             - containerPort: 5000
           resources:
