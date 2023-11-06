@@ -4,7 +4,16 @@ Our yolo-app is to be orchestrated by Kubernetes. Thus deployments and services 
 
 Deployment to GKE
 
-Because this is a stateful application, I utilized Statefulsets for the database. This indicates that the information is persistent.
-Because it is a stateless application, I used a deployment for the backend. This signifies that the data in this circumstance is not permanent.
-To make it available from outside the cluster, the backend service type was changed to LoadBalancer.
+In our application architecture, we've used StatefulSets for the database and Deployments for the backend.
+
+StatefulSets for the Database (Stateful Application):
+
+We chose StatefulSets for our database components. StatefulSets are ideal for applications that require stable network identities and persistent storage. In our case, the database is a stateful application because it needs a stable network identity for communication and persistent storage to store data reliably. Each pod within the StatefulSet has a unique and stable hostname, allowing for predictable network communication and ensuring that data is stored persistently even if a pod is rescheduled or replaced.
+
+Deployments for the Backend (Stateless Application):
+
+For our backend services, we opted for Deployments. Deployments are well-suited for stateless applications where instances can be easily scaled up or down without relying on persistent local storage. In our scenario, the backend is stateless because it doesn't rely on stored data within the pods. Any necessary data is fetched from the stateful database. Deployments allow us to scale horizontally, meaning we can add or remove backend instances dynamically based on demand without worrying about managing stateful data within each instance.
+
 The frontend & backend deployment each have 2 replicas, this is incase of any downtimes or failures. A backup is ensured and is present.
+
+This architectural decision ensures that our application benefits from both stable, persistent data storage and the ability to handle varying loads efficiently.
